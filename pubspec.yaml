@@ -50,10 +50,6 @@ dev_dependencies:
     sdk: flutter
   bloc_test: ^10.0.0
   mocktail: ^1.0.5
-  # dialer:
-  #   git:
-  #     url: https://github.com/yogitah-mecha/mechanix-dialer.git
-  #     ref: 850d4789afca32ba4210d21821f666e61ba8f865
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

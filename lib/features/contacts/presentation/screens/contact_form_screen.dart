@@ -68,128 +68,101 @@ class _ContactFormScreenState extends State<ContactFormScreen> {
     super.dispose();
   }
 
-  // Phone number field management
-  void _addPhoneController([String text = '']) {
+  /// Shared helper methods for managing dynamic phone and email input fields,
+  /// including controller creation, automatic field addition/removal,
+  /// and cleanup of redundant empty fields.
+  void _addController(
+    List<TextEditingController> controllers,
+    void Function(TextEditingController controller) onChanged, [
+    String text = '',
+  ]) {
     final controller = TextEditingController(text: text);
 
     controller.addListener(() {
-      _handlePhoneFieldChanged(controller);
+      onChanged(controller);
     });
 
-    _phoneControllers.add(controller);
+    controllers.add(controller);
   }
 
-  void _handlePhoneFieldChanged(TextEditingController controller) {
-    final index = _phoneControllers.indexOf(controller);
+  void _handleFieldChanged(
+    TextEditingController controller,
+    List<TextEditingController> controllers,
+    VoidCallback addController,
+  ) {
+    final index = controllers.indexOf(controller);
 
     if (index == -1) return;
 
-    // User started typing in last field
-    if (index == _phoneControllers.length - 1 &&
-        controller.text.trim().isNotEmpty) {
-      setState(() {
-        _addPhoneController();
-      });
+    if (index == controllers.length - 1 && controller.text.trim().isNotEmpty) {
+      setState(addController);
     }
 
-    _removeExtraEmptyFields();
+    _removeExtraEmptyControllers(controllers);
   }
 
-  void _removeExtraEmptyFields() {
+  void _removeControllerField(
+    int index,
+    List<TextEditingController> controllers,
+    VoidCallback addController,
+  ) {
+    if (controllers.length <= 1) return;
+
+    setState(() {
+      controllers[index].dispose();
+      controllers.removeAt(index);
+
+      if (controllers.isEmpty || controllers.last.text.trim().isNotEmpty) {
+        addController();
+      }
+    });
+  }
+
+  void _removeExtraEmptyControllers(List<TextEditingController> controllers) {
     final emptyIndexes = <int>[];
 
-    for (int i = 0; i < _phoneControllers.length; i++) {
-      if (_phoneControllers[i].text.trim().isEmpty) {
+    for (int i = 0; i < controllers.length; i++) {
+      if (controllers[i].text.trim().isEmpty) {
         emptyIndexes.add(i);
       }
     }
 
-    // Keep only the last empty field
     if (emptyIndexes.length <= 1) return;
 
     setState(() {
       for (int i = emptyIndexes.length - 2; i >= 0; i--) {
         final removeIndex = emptyIndexes[i];
 
-        _phoneControllers[removeIndex].dispose();
-        _phoneControllers.removeAt(removeIndex);
+        controllers[removeIndex].dispose();
+        controllers.removeAt(removeIndex);
       }
     });
   }
 
+  // Phone number field management
+  void _addPhoneController([String text = '']) {
+    _addController(_phoneControllers, _handlePhoneFieldChanged, text);
+  }
+
+  void _handlePhoneFieldChanged(TextEditingController controller) {
+    _handleFieldChanged(controller, _phoneControllers, _addPhoneController);
+  }
+
   void _removePhoneNumberField(int index) {
-    if (_phoneControllers.length <= 1) return;
-
-    setState(() {
-      _phoneControllers[index].dispose();
-      _phoneControllers.removeAt(index);
-
-      if (_phoneControllers.isEmpty ||
-          _phoneControllers.last.text.trim().isNotEmpty) {
-        _addPhoneController();
-      }
-    });
+    _removeControllerField(index, _phoneControllers, _addPhoneController);
   }
 
   // Email field management
   void _addEmailController([String text = '']) {
-    final controller = TextEditingController(text: text);
-
-    controller.addListener(() {
-      _handleEmailFieldChanged(controller);
-    });
-
-    _emailControllers.add(controller);
+    _addController(_emailControllers, _handleEmailFieldChanged, text);
   }
 
   void _handleEmailFieldChanged(TextEditingController controller) {
-    final index = _emailControllers.indexOf(controller);
-
-    if (index == -1) return;
-
-    if (index == _emailControllers.length - 1 &&
-        controller.text.trim().isNotEmpty) {
-      setState(() {
-        _addEmailController();
-      });
-    }
-
-    _removeExtraEmptyEmailFields();
-  }
-
-  void _removeExtraEmptyEmailFields() {
-    final emptyIndexes = <int>[];
-
-    for (int i = 0; i < _emailControllers.length; i++) {
-      if (_emailControllers[i].text.trim().isEmpty) {
-        emptyIndexes.add(i);
-      }
-    }
-
-    if (emptyIndexes.length <= 1) return;
-
-    setState(() {
-      for (int i = emptyIndexes.length - 2; i >= 0; i--) {
-        final removeIndex = emptyIndexes[i];
-
-        _emailControllers[removeIndex].dispose();
-        _emailControllers.removeAt(removeIndex);
-      }
-    });
+    _handleFieldChanged(controller, _emailControllers, _addEmailController);
   }
 
   void _removeEmailField(int index) {
-    if (_emailControllers.length <= 1) return;
-
-    setState(() {
-      _emailControllers[index].dispose();
-      _emailControllers.removeAt(index);
-
-      if (_emailControllers.isEmpty ||
-          _emailControllers.last.text.trim().isNotEmpty) {
-        _addEmailController();
-      }
-    });
+    _removeControllerField(index, _emailControllers, _addEmailController);
   }
 
   void _save() {
