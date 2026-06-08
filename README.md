@@ -1,6 +1,6 @@
 # 👤 Mechanix Contacts
 
-Dialer App lets you manage contacts, built with Flutter Elinux for Mechanix OS. It provides a simple and intuitive interface for managing your contact list.
+Contacts App lets you manage contacts, built with Flutter Elinux for Mechanix OS. It provides a simple and intuitive interface for managing your contact list.
 
 ## 📦 Install Guide
 
@@ -9,7 +9,7 @@ Dialer App lets you manage contacts, built with Flutter Elinux for Mechanix OS. 
 * [Flutter-Elinux SDK](https://github.com/flutter-elinux/flutter-elinux)
 * [Dart SDK](https://dart.dev/get-dart)
 
-### 🚀 Steps to run Dialer App:
+### 🚀 Steps to run Contacts App:
 
 1. Clone the repository:
 
