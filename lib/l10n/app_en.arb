@@ -1,0 +1,96 @@
+{
+  "contacts": "Contacts",
+  "call" : "Call",
+  "message" : "Message",
+  "cancel" : "Cancel",
+  "delete" : "Delete",
+  "deleteContactTitle": "Delete contact?",
+  "deleteContactConfirmation": "Are you sure you want to delete '{name}'?",
+  "@deleteContactConfirmation": {
+    "placeholders": {
+      "name": {
+        "type": "String"
+      }
+    }
+  },
+  "editContact": "Edit contact",
+  "newContact": "New contact",
+  "save": "Save",
+  "deleteContact": "Delete contact",
+
+
+  "name": "Name",
+  "enterName": "Enter name",
+  "pleaseEnterName": "Please enter a name",
+
+  "phoneNumbers": "Phone numbers",
+  "addNumber": "Add number",
+
+  "enterPhoneNumber": "Enter phone number",
+  "pleaseEnterAtLeastOnePhoneNumber": "Please enter at least one phone number.",
+
+
+  "invalidPhoneNumber": "Only numbers and symbols (+, -, (, )) are allowed",
+  "@invalidPhoneNumber": {
+    "description": "Shown when a phone number contains invalid characters"
+  },
+
+  "phoneNumberTooShort": "Please enter at least 3 digits",
+  "@phoneNumberTooShort": {
+    "description": "Shown when a phone number is too short"
+  },
+
+  "searchInContacts": "Search in contacts",
+  "myCard": "My card",
+  "noContactsFound": "No contacts found",
+  "noPhoneNumbers": "No phone numbers",
+  "contactAlphabet": "ABCDEFGHIJKLMNOPQRSTUVWXYZ#",
+  "@contactAlphabet": {
+    "description": "Alphabet used for contact list indexing"
+  },
+
+  "emails": "Emails",
+  "enterEmailAddress": "Enter email address",
+  "invalidEmail": "Please enter a valid email address",
+  "preferredLine" : "Preferred line",
+
+  "selectPreferredLine": "Select preferred line",
+  "@selectPreferredLine": {
+    "description": "Dialog title for selecting preferred phone line"
+  },
+
+  "invalidName": "Please enter a valid name",
+  "@invalidName": {
+    "description": "Validation message shown when contact name contains invalid characters"
+  },
+
+  "nameTooShort": "Name must contain at least 2 characters",
+  "@nameTooShort": {
+    "description": "Validation message shown when contact name is too short"
+  },
+
+  "nameTooLong": "Name cannot exceed {maxLength} characters",
+  "@nameTooLong": {
+    "description": "Validation message shown when contact name exceeds maximum length",
+    "placeholders": {
+      "maxLength": {
+        "type": "int"
+      }
+    }
+  },
+  "errorMessage": "Error: {error}",
+  "@errorMessage": {
+    "placeholders": {
+      "error": {}
+    }
+  },
+
+  "failedToLoadContacts": "Failed to load contacts",
+  "failedToSaveContact": "Failed to save contact",
+  "failedToDeleteContact": "Failed to delete contact",
+  "failedToUpdateContact": "Failed to update contact",
+  "contactsDatabaseUnavailable": "Contacts database is unavailable",
+  "somethingWentWrong": "Something went wrong",
+  "failedToSearchContact": "Failed to search contact"
+
+}
