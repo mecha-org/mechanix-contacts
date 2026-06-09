@@ -155,7 +155,7 @@ class _ContactsScreenState extends State<ContactsScreen> {
         ),
       ),
       title: Text(
-        'My card',
+        AppLocalizations.of(context)!.myCard,
         style: Theme.of(
           context,
         ).textTheme.labelMedium?.copyWith(color: AppColors.onSurface),
