@@ -5,6 +5,6 @@ class AppConstants {
 
   static final home = Platform.environment['HOME'];
   static final contactsStoreDir = Directory(
-    '$home/.config/mechanix_contacts/objectbox',
+    '$home/.config/mechanix_apps/contacts/objectbox',
   );
 }
