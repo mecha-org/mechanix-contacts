@@ -30,8 +30,13 @@ class ContactsRepositoryImpl implements ContactsRepository {
   Box<SimCardEntity> get _sims => _simsBox ?? ContactsStoreService.sims;
 
   Future<void> _ensureConnected() async {
-    if (_store == null) {
-      await ContactsStoreService.ensureConnected();
+    try {
+      if (_store == null) {
+        await ContactsStoreService.ensureConnected();
+      }
+    } catch (e, stackTrace) {
+      AppLogger.e('Failed to connect to contacts store: $e', stack: stackTrace);
+      rethrow;
     }
   }
 
