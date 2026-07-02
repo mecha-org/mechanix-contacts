@@ -105,6 +105,8 @@ class _NameField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return TextFormField(
       controller: controller,
       decoration: InputDecoration(
@@ -127,23 +129,31 @@ class _NameField extends StatelessWidget {
         final name = value?.trim() ?? '';
 
         if (name.isEmpty) {
-          return AppLocalizations.of(context)!.pleaseEnterName;
+          return l10n.pleaseEnterName;
         }
 
         if (name.length < 2) {
-          return AppLocalizations.of(context)!.nameTooShort;
-        }
-
-        final nameRegex = RegExp(r"^[a-zA-ZÀ-ÿ\s'.-]+$");
-
-        if (!nameRegex.hasMatch(name)) {
-          return AppLocalizations.of(context)!.invalidName;
+          return l10n.nameTooShort;
         }
 
         if (name.length > AppConstants.maxContactNameLength) {
-          return AppLocalizations.of(
-            context,
-          )!.nameTooLong(AppConstants.maxContactNameLength);
+          return l10n.nameTooLong(AppConstants.maxContactNameLength);
+        }
+
+        // Must start with a letter
+        if (!RegExp(r'^[A-Za-zÀ-ÿ]').hasMatch(name)) {
+          return l10n.invalidName;
+        }
+
+        // Allow letters, digits, spaces and common punctuation
+        final allowedChars = RegExp(r"^[A-Za-zÀ-ÿ0-9\s'.()\-&_#]+$");
+        if (!allowedChars.hasMatch(name)) {
+          return l10n.invalidName;
+        }
+
+        // Must contain at least one letter
+        if (!RegExp(r'[A-Za-zÀ-ÿ]').hasMatch(name)) {
+          return l10n.invalidName;
         }
 
         return null;
@@ -201,9 +211,7 @@ class _PhoneField extends StatelessWidget {
           const SizedBox(width: 8),
           IconButton(
             icon: Icon(
-              isLast
-                  ? Icons.add_circle_outline
-                  : Icons.remove_circle_outline,
+              isLast ? Icons.add_circle_outline : Icons.remove_circle_outline,
               color: isLast ? Colors.blue : Colors.redAccent,
             ),
             onPressed: isLast ? onAdd : onRemove,
@@ -258,9 +266,7 @@ class _EmailField extends StatelessWidget {
           const SizedBox(width: 8),
           IconButton(
             icon: Icon(
-              isLast
-                  ? Icons.add_circle_outline
-                  : Icons.remove_circle_outline,
+              isLast ? Icons.add_circle_outline : Icons.remove_circle_outline,
               color: isLast ? Colors.blue : Colors.redAccent,
             ),
             onPressed: isLast ? onAdd : onRemove,
