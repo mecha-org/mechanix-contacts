@@ -70,6 +70,9 @@ class AppLocalizationsEn extends AppLocalizations {
       'Only numbers and symbols (+, -, (, )) are allowed';
 
   @override
+  String get invalidPhoneNumberFormat => 'Please enter a valid phone number';
+
+  @override
   String get phoneNumberTooShort => 'Please enter at least 3 digits';
 
   @override
@@ -138,4 +141,8 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get failedToSearchContact => 'Failed to search contact';
+
+  @override
+  String get contactAlreadyExists =>
+      'A contact with this name and phone number already exists';
 }
