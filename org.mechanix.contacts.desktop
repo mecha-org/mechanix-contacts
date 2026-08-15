@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Mechanix Contacts
+Comment=Contacts for Mechanix OS
+Exec=mechanix_contacts -s 1
+Icon=org.mechanix.contacts
+Terminal=false
+Categories=Utility;Office;
+StartupNotify=true
+StartupWMClass=org.mechanix.contacts
